@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Screen
 import 'package:interfaces_flutter/auth/ui/screens/facebook_login_screen.dart';
 import 'package:interfaces_flutter/auth/ui/screens/contact_users_screen.dart';
+import 'package:interfaces_flutter/auth/ui/screens/instagram_login_screen.dart';
 import 'package:interfaces_flutter/auth/ui/screens/login_screen.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         buttonColor: Colors.blueAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: FacebookLoginScreen(),
+      home: InstragramLoginScreen(),
     );
   }
 }
