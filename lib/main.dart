@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 // Screen
-import 'package:interfaces_flutter/auth/ui/screens/facebook_login_screen.dart';
 import 'package:interfaces_flutter/auth/ui/screens/contact_users_screen.dart';
+import 'package:interfaces_flutter/auth/ui/screens/facebook_login_screen.dart';
 import 'package:interfaces_flutter/auth/ui/screens/instagram_login_screen.dart';
 import 'package:interfaces_flutter/auth/ui/screens/login_screen.dart';
+import 'package:interfaces_flutter/auth/ui/screens/menu_screen.dart';
+import 'package:interfaces_flutter/auth/ui/screens/stream_builder_screen.dart';
+import 'package:interfaces_flutter/auth/ui/screens/streams_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,15 +17,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login en Flutter Cotrafa',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        buttonColor: Colors.blueAccent,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: InstragramLoginScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Login en Flutter Cotrafa',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MenuScreen(),
+          '/contact': (context) => ContactUserScreen(),
+          '/facebook': (context) => FacebookLoginScreen(),
+          '/instagram': (context) => InstragramLoginScreen(),
+          '/login': (context) => LoginScreen(),
+          '/streamBuilder': (context) => StreamBuilderScreen(),
+          '/stream': (context) => StreamsScreen(),
+        },
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          buttonColor: Colors.blueAccent,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ));
   }
 }
 
@@ -112,4 +123,27 @@ class MyFloatingButton extends StatelessWidget {
       child: Icon(Icons.add),
     );
   }
+}
+
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget widget;
+  SlideRightRoute({this.widget})
+      : super(
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return widget;
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) {
+            return new SlideTransition(
+              position: new Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child,
+            );
+          },
+        );
 }
